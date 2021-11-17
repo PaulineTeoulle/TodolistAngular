@@ -1,0 +1,23 @@
+<div class="view">
+  <input  [(ngModel)]="data.isDone" 
+          class = "toggle"
+          type  = "checkbox"
+          name  = "done"
+          (change)="updateDone($event)"
+  />
+  <label *ngIf="!editing" class = "texte" (dblclick) ="toggleMode()">{{data.label}}</label>
+  <button (click)="delete()" class="destroy"></button>
+</div>
+<form> 
+  <input  *ngIf="editing"
+          #newTextInput
+          name      = "newTextInput"
+          class     = "edit"
+          type = "text"
+          [autofocus]="true"
+          [style.display] = "!editing"
+          [value]="data.label"
+          [(ngModel)]="newValue"
+          (focusout)="updateValue()"
+  />
+</form>
