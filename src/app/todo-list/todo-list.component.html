@@ -11,11 +11,15 @@
               autofocus #lab/>
     </form>
   </header>
+
+  
   <section class="main">
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
     />
+
+    
     
     <label for="toggleAll">Mark all as complete</label>
     <ul class="todo-list" *ngFor="let todoItem of todoList.items">
@@ -38,6 +42,20 @@
         </li>
       </ul>
       <button class="clear-completed">Supprimer cochées</button>
+    </footer>
+
+    <footer class="footer">
+      <ul class="filters">
+        <li>
+          <a class="deleteAll" (click) ="deleteAllItems(todoList.items)">Tout effacer</a>
+        </li>
+        <li>
+          <a class="undo">Annuler</a>
+        </li>
+        <li>
+          <a class="redo">Refaire</a>
+        </li>
+      </ul>
     </footer>
   </section>
 

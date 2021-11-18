@@ -31,6 +31,12 @@ export class TodoListComponent {
   getItemsNotDone(itemList: Readonly<TodoItem[]>) :number{
     return itemList.reduce((count, item)=> (!item.isDone ? count +1 : count), 0);
   }
+
+  deleteAllItems(itemList: Readonly<TodoItem[]>){
+    itemList.forEach(element => {
+      this.todoListService.remove(element);
+    });
+  }
 }
 
 
