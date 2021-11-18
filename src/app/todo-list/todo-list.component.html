@@ -3,7 +3,7 @@
     <h1 >{{todoList.label}}
     </h1> 
   
-    <form (ngSubmit) ="addTodo()">
+    <form (ngSubmit) ="addTodoItem()">
       <input  [(ngModel)]= "todoInputValue"
               name        = "newTodoInput"
               class       = "new-todo"
@@ -18,9 +18,9 @@
     />
     
     <label for="toggleAll">Mark all as complete</label>
-    <ul class="todo-list" *ngFor="let todo of todoList.items">
+    <ul class="todo-list" *ngFor="let todoItem of todoList.items">
       
-        <app-todo-item [todo]="todo" (deleteEmitter)="deleteTodo($event)" (updateEmitter)="updateTodo($event, todo)"></app-todo-item>
+        <app-todo-item [todo]="todoItem" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
       
       </ul>
     </section>

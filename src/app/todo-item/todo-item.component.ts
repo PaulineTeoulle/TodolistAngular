@@ -1,7 +1,7 @@
 
 
 import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import { TodoItem, TodolistService } from '../todolist.service';
+import { TodoItem} from '../todolist.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class TodoItemComponent {
   editMode = false;
   newValue!: string;
 
-  delete(): void {
+  deleteItem(): void {
     this.deleteEmitter.emit(this.todo);
   }
 

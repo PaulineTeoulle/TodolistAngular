@@ -7,7 +7,7 @@
            (change)="updateItemDone($event)"
     />
     <label *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todo.label}}</label>
-    <button (click)="delete()" class="destroy"></button>
+    <button (click)="deleteItem()" class="destroy"></button>
   </div>
 
   <input 
