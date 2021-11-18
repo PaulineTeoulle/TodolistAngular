@@ -24,7 +24,7 @@ export class AppComponent {
     this.todolistService.append(label);
   }
 
-  updateValue(value:any,item:TodoItem):void{
+  updateItem(value:any,item:TodoItem):void{
     this.todolistService.update(value,item);
   }
   

@@ -22,12 +22,12 @@
 <ul *ngIf = "obsTodoList |async as TDL">
     <li *ngFor="let element of TDL.items, index as i">
         <div class="view">
-            <input type ="checkbox" class="toggle" name="done" [ngModel]="element.isDone"  (ngModelChange) ="updateValue({isDone:$event},element)"/>
+            <input type ="checkbox" class="toggle" name="done" [ngModel]="element.isDone"  (ngModelChange) ="updateItem({isDone:$event},element)"/>
             {{element.label}}
             <label class="texte"></label>
             <button class="destroy" (click) ="deleteItem(element)">Supprimer</button>
 
-            <form (ngSubmit)= "updateValue({label:newTextInput.value},element)">
+            <form (ngSubmit)= "updateItem({label:newTextInput.value},element)">
                 <input [ngModel]="element.label" #newTextInput name="newTextInput" class="edit">
             </form>
         </div>

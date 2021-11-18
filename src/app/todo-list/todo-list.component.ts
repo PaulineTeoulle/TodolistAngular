@@ -1,15 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {TodolistService, TodoList, TodoItem} from '../todolist.service';
-
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent {
 
-  listLabel = "";
   todoInputValue: string;
   todoListService: TodolistService;
 
@@ -18,13 +15,8 @@ export class TodoListComponent implements OnInit {
     this.todoInputValue = '';
   }
 
-  ngOnInit(): void {
-  }
-
-  updateListLabel(){
-  }
-
   addTodo(): void {
+    console.log('add TODO');
     this.todoListService.append(this.todoInputValue);
     this.todoInputValue = '';
   }
@@ -37,8 +29,10 @@ export class TodoListComponent implements OnInit {
     this.todoListService.update(event, todo);
   }
 
-  /*getTodoRemainsNumber(list: Readonly< TodoItem[] >): number {
-    return list.reduce((total, v) => (!v.isDone ? total + 1 : total), 0);
-  }*/
-
+  getItemsNotDone(itemList: Readonly<TodoItem[]>) :number{
+    return itemList.reduce((count, item)=> (!item.isDone ? count +1 : count), 0);
+  }
 }
+
+
+

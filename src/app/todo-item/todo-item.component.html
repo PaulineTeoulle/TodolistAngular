@@ -1,23 +1,25 @@
-<div class="view">
-  <input  [(ngModel)]="data.isDone" 
-          class = "toggle"
-          type  = "checkbox"
-          name  = "done"
-          (change)="updateDone($event)"
+<li [class.editMode]="editMode" [class.completed]="todo.isDone">
+  <div class="view">
+    <input [checked]="todo.isDone"
+           class="toggle"
+           type="checkbox"
+           name="done"
+           (change)="updateItemDone($event)"
+    />
+    <label *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todo.label}}</label>
+    <button (click)="delete()" class="destroy"></button>
+  </div>
+
+  <input 
+    *ngIf="editMode"
+    name="newTextInput"
+    class="edit"
+    type="text"
+    [value]="todo.label"
+    [(ngModel)]="newValue"
+    [style.display]="!editMode"
+    [autofocus]="true"
+    (keyup.enter) = "updateItem()"
+    (focusout)="changeEditMode()"
   />
-  <label *ngIf="!editing" class = "texte" (dblclick) ="toggleMode()">{{data.label}}</label>
-  <button (click)="delete()" class="destroy"></button>
-</div>
-<form> 
-  <input  *ngIf="editing"
-          #newTextInput
-          name      = "newTextInput"
-          class     = "edit"
-          type = "text"
-          [autofocus]="true"
-          [style.display] = "!editing"
-          [value]="data.label"
-          [(ngModel)]="newValue"
-          (focusout)="updateValue()"
-  />
-</form>
+</li>

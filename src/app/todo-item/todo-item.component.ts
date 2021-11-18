@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { isUndefined } from 'util';
-import { TodoItem } from '../todolist.service';
+
+
+import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
+import { TodoItem, TodolistService } from '../todolist.service';
+
 
 @Component({
   selector: 'app-todo-item',
@@ -8,38 +10,31 @@ import { TodoItem } from '../todolist.service';
   styleUrls: ['./todo-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoItemComponent implements OnInit {
- 
-  @Input() data! : TodoItem;
-  @Output() update :  EventEmitter<Partial<TodoItem>> = new EventEmitter<Partial<TodoItem>>();
-  @Output() remove : EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
-  editing = false;
+export class TodoItemComponent {
+
+  @Input() todo!: TodoItem;
+
+  @Output() deleteEmitter: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
+  @Output() updateEmitter: EventEmitter<Partial<TodoItem>> = new EventEmitter<Partial<TodoItem>>();
+  editMode = false;
   newValue!: string;
 
-  constructor() { 
-    
-  }
-
-  ngOnInit(): void {
-  }
-
-  updateValue(): void {
-    if (this.newValue !== undefined && this.newValue !== '') {
-      this.update.emit({label: this.newValue});
-    }
-    this.changeEditingMode();
-  }
-
-  changeEditingMode(): void {
-    this.editing = !this.editing;
-  }
-
-  
   delete(): void {
-    this.remove.emit(this.data);
+    this.deleteEmitter.emit(this.todo);
   }
 
-  updateDone(event: any): void {
-    this.update.emit({isDone: event.target.checked});
+  changeEditMode(): void {
+    this.editMode = !this.editMode;
+  }
+
+  updateItem(): void {
+    if (this.newValue !== undefined && this.newValue !== '') {
+      this.updateEmitter.emit({label: this.newValue});
+    }
+    this.changeEditMode();
+  }
+
+  updateItemDone(event: any): void {
+    this.updateEmitter.emit({isDone: event.target.checked});
   }
 }

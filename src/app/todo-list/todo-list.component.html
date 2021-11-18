@@ -1,82 +1,43 @@
-<!--
-<section class="todoapp">
-    <header class="header">
-      <h1></h1> 
-      <form>
-        <input  name        = "newTodoInput"
-                class       = "new-todo"
-                placeholder = "Que faire?"
-                autofocus #lab/>
-      </form>
-    </header>
-    <section class="main">
-      <input  class="toggle-all"
-              type="checkbox"
-              name="toggleAll"
-      />
-      <label for="toggleAll">Mark all as complete</label>
-      <ul class="todo-list">
-       
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count"><strong></strong> restantes</span>
-      <ul class="filters">
-        <li>
-          <a class="filterAll">Tous</a>
-        </li>
-        <li>
-          <a class="filterActives">Actifs</a>
-        </li>
-        <li>
-          <a class="filterCompleted">Complétés</a>
-        </li>
-      </ul>
-      <button class="clear-completed">Supprimer cochées</button>
-    </footer>
-  </section>
--->
-
-  <section class="todoapp" *ngIf="todoListService.observable|async as todoList">
-    <header class="header">
-      <h1 >{{todoList.label}}
-      </h1> 
-    
-      <form (ngSubmit) ="addTodo()">
-        <input  [(ngModel)]= "todoInputValue"
-                name        = "newTodoInput"
-                class       = "new-todo"
-                placeholder = "Que faire?"
-                autofocus #lab/>
-      </form>
-    </header>
-    <section class="main">
-      <input  class="toggle-all"
-              type="checkbox"
-              name="toggleAll"
-      />
-      
-      <label for="toggleAll">Mark all as complete</label>
-      <ul class="todo-list">
-        <li *ngFor="let data of todoList.items" [className]="editing" [class.completed]="data.isDone" >
-          <app-todo-item [data]="data" (remove)="deleteTodo($event)" (update) ="updateTodo($event)"></app-todo-item>
-        </li>
-        </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count"><strong></strong> restantes</span>
-      <ul class="filters">
-        <li>
-          <a class="filterAll">Tous</a>
-        </li>
-        <li>
-          <a class="filterActives">Actifs</a>
-        </li>
-        <li>
-          <a class="filterCompleted">Complétés</a>
-        </li>
-      </ul>
-      <button class="clear-completed">Supprimer cochées</button>
-    </footer>
-  </section>
+<section class="todoapp" *ngIf="todoListService.observable|async as todoList">
+  <header class="header">
+    <h1 >{{todoList.label}}
+    </h1> 
   
+    <form (ngSubmit) ="addTodo()">
+      <input  [(ngModel)]= "todoInputValue"
+              name        = "newTodoInput"
+              class       = "new-todo"
+              placeholder = "Que faire?"
+              autofocus #lab/>
+    </form>
+  </header>
+  <section class="main">
+    <input  class="toggle-all"
+            type="checkbox"
+            name="toggleAll"
+    />
+    
+    <label for="toggleAll">Mark all as complete</label>
+    <ul class="todo-list" *ngFor="let todo of todoList.items">
+      
+        <app-todo-item [todo]="todo" (deleteEmitter)="deleteTodo($event)" (updateEmitter)="updateTodo($event, todo)"></app-todo-item>
+      
+      </ul>
+    </section>
+    <footer class="footer">
+      <span class="todo-count"><strong>{{getItemsNotDone(todoList.items)}}</strong> restantes</span>
+      <ul class="filters">
+        <li>
+          <a class="filterAll">Tous</a>
+        </li>
+        <li>
+          <a class="filterActives">Actifs</a>
+        </li>
+        <li>
+          <a class="filterCompleted">Complétés</a>
+        </li>
+      </ul>
+      <button class="clear-completed">Supprimer cochées</button>
+    </footer>
+  </section>
+
