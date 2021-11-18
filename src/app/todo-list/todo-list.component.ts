@@ -28,15 +28,24 @@ export class TodoListComponent {
     this.todoListService.update(event, todoItem);
   }
 
-  getItemsNotDone(itemList: Readonly<TodoItem[]>) :number{
+  getItemsNotDone(itemList: Readonly<TodoItem[]>) : number{
     return itemList.reduce((count, item)=> (!item.isDone ? count +1 : count), 0);
   }
 
-  deleteAllItems(itemList: Readonly<TodoItem[]>){
-    itemList.forEach(element => {
-      this.todoListService.remove(element);
+  deleteAllItems(itemList: Readonly<TodoItem[]>) : void {
+    itemList.forEach(item => {
+      this.todoListService.remove(item);
     });
   }
+
+  deleteCheckedItems(itemList: Readonly<TodoItem[]>) : void{
+    itemList.forEach(item => {
+      if(item.isDone){
+        this.todoListService.remove(item);
+      }
+    });
+  }
+ 
 }
 
 
