@@ -64,6 +64,14 @@ export class TodoListComponent {
     }
     return false;
   }
+
+  undo(){
+    this.todoListService.undo();
+  }
+
+  redo(){
+    this.todoListService.redo();
+  }
 }
 
 
