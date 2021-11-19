@@ -10,11 +10,13 @@ export class TodoListComponent {
   todoInputValue: string;
   todoListService: TodolistService;
   filter : string;
+  checkAll : boolean;
 
   constructor(service: TodolistService) {
     this.todoListService = service;
     this.todoInputValue = '';
-    this.filter='all';
+    this.filter='filterAll';
+    this.checkAll= false;
   }
 
   addTodoItem(): void {
@@ -46,6 +48,11 @@ export class TodoListComponent {
         this.todoListService.remove(item);
       }
     });
+  }
+
+  checkAllItems(){
+    this.todoListService.updateAll({isDone: this.checkAll});
+    this.checkAll = !this.checkAll;
   }
 
   setFilter(filter: string){

@@ -1,6 +1,6 @@
 <section class="todoapp" *ngIf="todoListService.observable|async as todoList">
   <header class="header">
-    <h1 >{{todoList.label}}
+    <h1>{{todoList.label}}
     </h1> 
   
     <form (ngSubmit) ="addTodoItem()">
@@ -17,7 +17,7 @@
             type="checkbox"
             name="toggleAll"
     /> 
-    <label for="toggleAll">Mark all as complete</label>
+    <label for="toggleAll" (click) = "checkAllItems()">Mark all as complete</label>
     <ul class="todo-list" *ngFor="let todoItem of todoList.items">
         <app-todo-item [todo]="todoItem" *ngIf="isItemFiltered(todoItem)" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
     </ul>
