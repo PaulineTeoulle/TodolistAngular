@@ -9,10 +9,12 @@ export class TodoListComponent {
 
   todoInputValue: string;
   todoListService: TodolistService;
+  filter : string;
 
   constructor(service: TodolistService) {
     this.todoListService = service;
     this.todoInputValue = '';
+    this.filter='all';
   }
 
   addTodoItem(): void {
@@ -45,7 +47,23 @@ export class TodoListComponent {
       }
     });
   }
- 
+
+  setFilter(filter: string){
+    this.filter=filter;
+  }
+
+  isItemFiltered(todoItem: TodoItem){
+    if(this.filter==='filterAll'){
+      return true;
+    }
+    if(this.filter==='filterActives' && !todoItem.isDone){
+      return true;
+    }
+    if(this.filter==='filterCompleted' && todoItem.isDone){
+      return true;
+    }
+    return false;
+  }
 }
 
 

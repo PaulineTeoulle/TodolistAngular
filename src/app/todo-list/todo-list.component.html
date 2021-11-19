@@ -12,42 +12,36 @@
     </form>
   </header>
 
-  
   <section class="main">
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
-    />
-
-    
-    
+    /> 
     <label for="toggleAll">Mark all as complete</label>
     <ul class="todo-list" *ngFor="let todoItem of todoList.items">
-      
-        <app-todo-item [todo]="todoItem" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
-      
-      </ul>
+        <app-todo-item [todo]="todoItem" *ngIf="isItemFiltered(todoItem)" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
+    </ul>
     </section>
     <footer class="footer">
       <span class="todo-count"><strong>{{getItemsNotDone(todoList.items)}}</strong> restantes</span>
       <ul class="filters">
         <li>
-          <a class="filterAll">Tous</a>
+          <a class="filterAll" (click) = "setFilter('filterAll')">Tous</a>
         </li>
         <li>
-          <a class="filterActives">Actifs</a>
+          <a class="filterActives" (click) = "setFilter('filterActives')" >Actifs</a>
         </li>
         <li>
-          <a class="filterCompleted">Complétés</a>
-        </li>
+          <a class="filterCompleted" (click) = "setFilter('filterCompleted')">Complétés</a>
+        </li> 
       </ul>
-      <button class="clear-completed" (click) ="deleteCheckedItems(todoList.items)">Supprimer cochées</button>
+      <button class="clear-completed" (click) = "deleteCheckedItems(todoList.items)">Supprimer cochées</button>
     </footer>
 
     <footer class="footer">
       <ul class="filters">
         <li>
-          <a class="deleteAll" (click) ="deleteAllItems(todoList.items)">Tout effacer</a>
+          <a class="deleteAll" (click) = "deleteAllItems(todoList.items)">Tout effacer</a>
         </li>
         <li>
           <a class="undo">Annuler</a>
