@@ -16,9 +16,8 @@ export class TodoItemComponent {
 
   @Output() deleteEmitter: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
   @Output() updateEmitter: EventEmitter<Partial<TodoItem>> = new EventEmitter<Partial<TodoItem>>();
-
-  
   @ViewChild('newTextInput') newTextInput!: ElementRef<HTMLInputElement>;
+  
   editMode = false;
   newValue!: string;
 

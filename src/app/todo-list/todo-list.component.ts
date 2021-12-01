@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TodolistService, TodoItem} from '../todolist.service';
+import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -10,13 +10,25 @@ export class TodoListComponent {
   todoInputValue: string;
   todoListService: TodolistService;
   filter : string;
-  checkAll : boolean;
+  checkAll : boolean; 
+
 
   constructor(service: TodolistService) {
     this.todoListService = service;
     this.todoInputValue = '';
     this.filter='filterAll';
     this.checkAll= false;
+  }
+
+  toStringQR(todolist: TodoList): string{
+    let newString = tdlToString(todolist);
+    
+    let stringForQR : string[] = []; 
+    stringForQR.push(newString);
+
+    
+    console.log(stringForQR);
+    return  stringForQR[0];
   }
 
   addTodoItem(): void {

@@ -122,7 +122,6 @@ export class TodolistService {
       }
     } );
   }
-
 }
 
 export function tdlToString(tdl: TodoList): string {
