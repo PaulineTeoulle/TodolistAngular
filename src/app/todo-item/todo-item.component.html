@@ -12,14 +12,13 @@
 
   <input 
     *ngIf="editMode"
+    #newTextInput
     name="newTextInput"
     class="edit"
     type="text"
     [value]="todo.label"
     [(ngModel)]="newValue"
     [style.display]="!editMode"
-    [autofocus]="true"
     (keyup.enter) = "updateItem()"
-    (focusout)="changeEditMode()"
-  />
+    (focusout) = "updateItem()"/>
 </li>
