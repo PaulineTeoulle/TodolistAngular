@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
-
+import $ from "jquery";
 import { SpeechRecognitionService } from "../speechRecognition.service";
 
 
@@ -78,12 +78,22 @@ export class TodoListComponent {
 
   isItemFiltered(todoItem: TodoItem) : boolean {
     if(this.filter==='filterAll'){
+      $('.filterAll').addClass('active');
+        $('.filterActives').removeClass('active');
+        $('.filterCompleted').removeClass('active');
       return true;
     }
-    if(this.filter==='filterActives' && !todoItem.isDone){
+    if(this.filter==='filterActives' && !todoItem.isDone){ 
+      $('.filterActives').addClass('active');
+      $('.filterAll').removeClass('active');
+      $('.filterCompleted').removeClass('active');
       return true;
     }
     if(this.filter==='filterCompleted' && todoItem.isDone){
+      $('.filterCompleted').addClass('active');
+        $('.filterAll').removeClass('active');
+        $('.filterActives').removeClass('active');
+        $(this).addClass('active');
       return true;
     }
     return false;

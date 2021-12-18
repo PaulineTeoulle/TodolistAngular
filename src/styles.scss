@@ -323,16 +323,21 @@ body {
   border-radius: 3px;
 }
 
-.filters li a:hover {
-  border-color: rgba(175, 47, 47, 0.1);
+.active {
+  font-weight: bold;
+  color: blue;
 }
 
-.filters li a:active{
+.filters li a:hover {
+  border-color: rgba(175, 47, 47, 0.1);
   font-weight: bold;
+  cursor: pointer;
 }
+
 
 .filters li a.selected {
   border-color: rgba(175, 47, 47, 0.2);
+  font-weight: bold;
 }
 
 .clear-completed,
