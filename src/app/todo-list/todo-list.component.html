@@ -9,8 +9,11 @@
               class       = "new-todo"
               placeholder = "Que faire?"
               autofocus #lab/>
+      <button (click) = "activeSpeechRecognition()"><img src="../../assets/img/icon-mic.png" alt="image"/></button>
     </form>
   </header>
+
+  
 
   <section class="main">
     <input  class="toggle-all"
@@ -21,6 +24,7 @@
     <ul class="todo-list" *ngFor="let todoItem of todoList.items">
         <app-todo-item [todo]="todoItem" *ngIf="isItemFiltered(todoItem)" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
     </ul>
+    
     </section>
     <footer class="footer">
       <span class="todo-count"><strong>{{getItemsNotDone(todoList.items)}}</strong> restantes</span>
@@ -38,22 +42,26 @@
       <button class="clear-completed" (click) = "deleteCheckedItems(todoList.items)">Supprimer cochées</button>
     </footer>
 
-    <footer class="footer">
+    <footer class="footer2">
       <ul class="filters">
-        <li>
-          <a class="deleteAll" (click) = "deleteAllItems(todoList.items)">Tout effacer</a>
-        </li>
+      
         <li>
           <a class="undo" (click) = "undo()">Annuler</a>
         </li>
         <li>
           <a class="redo" (click) = "redo()">Refaire</a>
         </li>
+        <li>
+          <a class="deleteAll" (click) = "deleteAllItems(todoList.items)">Tout effacer</a>
+        </li>
       </ul>
     </footer>
 
-    <div>
-      <qr-code [value]="toStringQR(todoList)"></qr-code>
-    </div>
+
 </section>
+<div *ngIf="todoListService.observable|async as todoList">
+  <qr-code [value]="toStringQR(todoList)" [size]="500"
+  ></qr-code>
+</div>
+
 

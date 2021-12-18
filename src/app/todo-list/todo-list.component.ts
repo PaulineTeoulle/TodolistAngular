@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
+
+import { SpeechRecognitionService } from "../speechRecognition.service";
+
+
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -7,44 +11,45 @@ import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.serv
 })
 export class TodoListComponent {
 
-  todoInputValue: string;
   todoListService: TodolistService;
+  speechRecognitionService: SpeechRecognitionService;
+  
+  inputSpeechText: string;
   filter : string;
+  todoInputValue: string;
   checkAll : boolean; 
+  imgPath : any = "../../mic.ico";
 
-
-  constructor(service: TodolistService) {
-    this.todoListService = service;
+  constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService){
+    this.todoListService = todoListService;
     this.todoInputValue = '';
     this.filter='filterAll';
     this.checkAll= false;
+    this.inputSpeechText = "";
+    this.speechRecognitionService = speechRecognitionService;
   }
 
-  toStringQR(todolist: TodoList): string{
-    let newString = tdlToString(todolist);
-    
+  toStringQR(todolist: TodoList) : string{
+    let newString : string = tdlToString(todolist);
     let stringForQR : string[] = []; 
     stringForQR.push(newString);
-
-    
-    console.log(stringForQR);
-    return  stringForQR[0];
+    return stringForQR[0];
   }
 
-  addTodoItem(): void {
+  addTodoItem() : void {
     this.todoListService.append(this.todoInputValue);
     this.todoInputValue = '';
   }
 
-  deleteTodoItem(todoItem: TodoItem): void {
+  deleteTodoItem(todoItem: TodoItem) : void {
     this.todoListService.remove(todoItem);
   }
 
-  updateTodoItem(event: Partial<TodoItem>, todoItem: TodoItem): void {
+  updateTodoItem(event: Partial<TodoItem>, todoItem: TodoItem) : void {
     this.todoListService.update(event, todoItem);
   }
 
-  getItemsNotDone(itemList: Readonly<TodoItem[]>) : number{
+  getItemsNotDone(itemList: Readonly<TodoItem[]>) : number {
     return itemList.reduce((count, item)=> (!item.isDone ? count +1 : count), 0);
   }
 
@@ -54,7 +59,7 @@ export class TodoListComponent {
     });
   }
 
-  deleteCheckedItems(itemList: Readonly<TodoItem[]>) : void{
+  deleteCheckedItems(itemList: Readonly<TodoItem[]>) : void {
     itemList.forEach(item => {
       if(item.isDone){
         this.todoListService.remove(item);
@@ -62,16 +67,16 @@ export class TodoListComponent {
     });
   }
 
-  checkAllItems(){
+  checkAllItems() : void {
     this.todoListService.updateAll({isDone: this.checkAll});
     this.checkAll = !this.checkAll;
   }
 
-  setFilter(filter: string){
+  setFilter(filter: string) : void {
     this.filter=filter;
   }
 
-  isItemFiltered(todoItem: TodoItem){
+  isItemFiltered(todoItem: TodoItem) : boolean {
     if(this.filter==='filterAll'){
       return true;
     }
@@ -91,6 +96,23 @@ export class TodoListComponent {
   redo(){
     this.todoListService.redo();
   }
+
+  activeSpeechRecognition() : void {
+    this.speechRecognitionService.record().subscribe(
+      (value : string) => {
+        this.inputSpeechText = value;
+      },
+      (error : string) => {
+        if (error === "no-speech") {
+          this.activeSpeechRecognition();
+        }
+      },
+      () => {
+        this.todoListService.append(this.inputSpeechText);
+      }
+    );
+  }
+
 }
 
 

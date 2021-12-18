@@ -43,12 +43,15 @@ export class TodolistService {
     return this;
   }
 
+
+
   remove(...items: Readonly<TodoItem[]>): this {
     const L = this.subj.getValue();
     const NL = {...L, items: L.items.filter(item => items.indexOf(item) === -1 ) };
     this.subj.next( NL );
     return this;
   }
+
 
   update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if(data.label !== "") {
