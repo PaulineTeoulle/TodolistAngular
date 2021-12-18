@@ -38,6 +38,12 @@ body {
   display: flex;
 }
 
+.icon{
+  
+  width:32px;
+  height: 32px;
+}
+
 .header>form>button{
   margin-right: 30px;
 }
@@ -267,7 +273,7 @@ body {
 .footer, .footer2 {
   color: #777;
   padding: 10px 15px;
-  height: 20px;
+  height: 30px;
   text-align: center;
   border-top: 1px solid #e6e6e6;
 }
@@ -314,12 +320,15 @@ body {
   margin: 3px;
   padding: 3px 7px;
   text-decoration: none;
-  border: 1px solid transparent;
   border-radius: 3px;
 }
 
 .filters li a:hover {
   border-color: rgba(175, 47, 47, 0.1);
+}
+
+.filters li a:active{
+  font-weight: bold;
 }
 
 .filters li a.selected {
