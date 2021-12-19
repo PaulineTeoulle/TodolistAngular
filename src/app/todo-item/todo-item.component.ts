@@ -3,7 +3,6 @@
 import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { TodoItem} from '../todolist.service';
 
-
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
@@ -20,6 +19,7 @@ export class TodoItemComponent {
   
   editMode = false;
   newValue!: string;
+  img:any;
 
   deleteItem(): void {
     this.deleteEmitter.emit(this.todo);
@@ -44,7 +44,5 @@ export class TodoItemComponent {
   updateItemDone(event: any): void {
     this.updateEmitter.emit({isDone: event.target.checked});
   }
-
-
   
 }

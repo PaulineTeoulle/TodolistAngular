@@ -7,13 +7,6 @@
            (change)="updateItemDone($event)"
     />
     <label *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todo.label}}</label>
-
-    <!--<input #imageInput
-         type="file"
-         accept="image/*"
-         (change)="processFile(imageInput)">-->
-
-
     <button (click)="deleteItem()" class="destroy"></button>
   </div>
 
@@ -28,4 +21,6 @@
     [style.display]="!editMode"
     (keyup.enter) = "updateItem()"
     (focusout) = "updateItem()"/>
+
+    
 </li>

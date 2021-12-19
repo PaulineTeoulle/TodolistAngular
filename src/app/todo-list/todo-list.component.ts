@@ -3,7 +3,6 @@ import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.serv
 import $ from "jquery";
 import { SpeechRecognitionService } from "../speechRecognition.service";
 
-
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -24,7 +23,9 @@ export class TodoListComponent {
   checkAll : boolean;
   imgPath : any = "../../mic.ico";
   newLabel: string ;
-  editMode = false;
+  editListLabelMode = false;
+  media: any;
+  imgIsLoaded = false;
 
   constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService){
     this.todoListService = todoListService;
@@ -35,6 +36,22 @@ export class TodoListComponent {
     this.newLabel="";
     this.speechRecognitionService = speechRecognitionService;
   }
+
+  loadImg(){
+    this.imgIsLoaded = !this.imgIsLoaded;
+  }
+
+  onFileChange(event:any){
+    let src;
+    let reader = new FileReader();
+    reader.onload = () => {
+      src = reader.result;
+      localStorage.setItem('media', JSON.stringify([  {"image" : src}]));
+      this.media = src;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
 
   toStringQR(todolist: TodoList) : string{
     let newString : string = tdlToString(todolist);
@@ -128,9 +145,9 @@ export class TodoListComponent {
     );
   }
 
-  changeEditMode(): void {
-    this.editMode = !this.editMode;
-    if (this.editMode) {
+  changeEditListLabelMode(): void {
+    this.editListLabelMode = !this.editListLabelMode;
+    if (this.editListLabelMode) {
       requestAnimationFrame(
         () => this.newTextInput.nativeElement.focus()
       );
@@ -141,6 +158,6 @@ export class TodoListComponent {
     if (this.newLabel !== undefined && this.newLabel !== '') {
       this.todoListService.updateListLabel(this.newLabel);
     }
-    this.changeEditMode();
+    this.changeEditListLabelMode();
   }
 }

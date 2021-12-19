@@ -1,20 +1,30 @@
 <section class="todoapp" *ngIf="todoListService.observable|async as todoList">
-  <header class="header">
-    <!--<h1>{{todoList.label}}
-    </h1> -->
 
-    <h1 *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todoList.label}}</h1>
+  <section class="imgUpload">
+    <div class="inputWrapper" *ngIf="!media">
+      <input type="file" (change)="onFileChange($event)" id="imgpicker" accept=".png, .jpg, .jpeg"/>
+      <input type="button" (click)="loadImg()" value="Upload l'image"/>
+    </div>
+    
+    <div class="imgList" *ngIf="imgIsLoaded">
+      <img class="brochure-poster" [src]="media"/>
+    </div>
+  </section>
+
+  <header class="header">
+    <h1 *ngIf="!editListLabelMode" (dblclick)="changeEditListLabelMode()" class="texte">{{todoList.label}}</h1>
     <input
-    *ngIf="editMode"
+    *ngIf="editListLabelMode"
     #newLabelInput
     name="newLabelInput"
     class="edit"
     type="text"
     [value]="todoList.label"
     [(ngModel)]="newLabel"
-    [style.display]="!editMode"
+    [style.display]="!editListLabelMode"
     (keyup.enter) = "updateListLabel()"
     (focusout) = "updateListLabel()"/>
+  
     <form (ngSubmit) ="addTodoItem()">
       <input  [(ngModel)]= "todoInputValue"
               name        = "newTodoInput"

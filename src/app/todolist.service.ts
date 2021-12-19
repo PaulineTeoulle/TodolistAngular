@@ -18,7 +18,7 @@ let idItem = 0;
   providedIn: 'root'
 })
 export class TodolistService {
-  private current: TodoList = {label: 'MIAGE', items: [] };
+  private current: TodoList = {label: 'MIAGE', items: []};
   private subj = new BehaviorSubject<TodoList>(this.current);
   readonly observable = this.subj.asObservable();
   private previous: TodoList[] = [];
@@ -45,7 +45,7 @@ export class TodolistService {
 
   updateListLabel(label: string): this{
     const L = this.subj.getValue();
-    const NL = {label, items: L.items};
+    const NL = {label, items: L.items, imgSrc: ""};
     this.subj.next( NL );
     return this;
   }

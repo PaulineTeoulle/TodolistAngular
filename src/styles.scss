@@ -422,3 +422,22 @@ html .clear-completed:active {
   }
   
 }
+
+.imgList img{
+  width: 550px;
+  height: auto;
+}
+
+.imgUpload{
+  background-color: red;display:flex;
+}
+
+
+.imgUpload{
+  &>.inputWrapper{
+    margin-right: 150px;
+    background-color: green;
+  }
+
+ 
+}
