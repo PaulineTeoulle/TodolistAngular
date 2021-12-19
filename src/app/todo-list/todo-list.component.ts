@@ -1,5 +1,8 @@
 import { Component, ElementRef, Output, EventEmitter,ViewChild } from '@angular/core';
 import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
+import{
+  DomSanitizationService
+} from '@angular/platform-browser';
 import $ from "jquery";
 import { SpeechRecognitionService } from "../speechRecognition.service";
 
@@ -25,7 +28,7 @@ export class TodoListComponent {
   newLabel: string ;
   editListLabelMode = false;
   media: any;
-  imgIsLoaded = false;
+  //sanitization:DomSanitizationService;
 
   constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService){
     this.todoListService = todoListService;
@@ -35,10 +38,16 @@ export class TodoListComponent {
     this.inputSpeechText = "";
     this.newLabel="";
     this.speechRecognitionService = speechRecognitionService;
+    //this.sanitization = sanitization;
   }
 
-  loadImg(){
-    this.imgIsLoaded = !this.imgIsLoaded;
+  ngOnInit(): void{
+    
+      var src = localStorage.getItem('media');
+      //this.sanitization.bypassSecurityTrustStyle(`url(${src})`);
+      this.media = src;
+      this.todoListService.updateImg(src);
+    
   }
 
   onFileChange(event:any){
@@ -48,10 +57,10 @@ export class TodoListComponent {
       src = reader.result;
       localStorage.setItem('media', JSON.stringify([  {"image" : src}]));
       this.media = src;
+      this.todoListService.updateImg(src);
     }
     reader.readAsDataURL(event.target.files[0]);
   }
-
 
   toStringQR(todolist: TodoList) : string{
     let newString : string = tdlToString(todolist);

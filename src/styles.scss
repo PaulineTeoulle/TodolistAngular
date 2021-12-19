@@ -429,15 +429,12 @@ html .clear-completed:active {
 }
 
 .imgUpload{
-  background-color: red;display:flex;
+  background-color: grey;
 }
 
 
-.imgUpload{
-  &>.inputWrapper{
-    margin-right: 150px;
-    background-color: green;
-  }
-
- 
+.inputWrapper{
+  border: 1px solid #ccc;
+  display: inline-block;
+  cursor: pointer;
 }
