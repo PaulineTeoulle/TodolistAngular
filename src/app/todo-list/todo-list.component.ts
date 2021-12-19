@@ -17,11 +17,11 @@ export class TodoListComponent {
 
   todoListService: TodolistService;
   speechRecognitionService: SpeechRecognitionService;
-  
+
   inputSpeechText: string;
   filter : string;
   todoInputValue: string;
-  checkAll : boolean; 
+  checkAll : boolean;
   imgPath : any = "../../mic.ico";
   newLabel: string ;
   editMode = false;
@@ -38,7 +38,7 @@ export class TodoListComponent {
 
   toStringQR(todolist: TodoList) : string{
     let newString : string = tdlToString(todolist);
-    let stringForQR : string[] = []; 
+    let stringForQR : string[] = [];
     stringForQR.push(newString);
     return stringForQR[0];
   }
@@ -90,7 +90,7 @@ export class TodoListComponent {
         $('.filterCompleted').removeClass('active');
       return true;
     }
-    if(this.filter==='filterActives' && !todoItem.isDone){ 
+    if(this.filter==='filterActives' && !todoItem.isDone){
       $('.filterActives').addClass('active');
       $('.filterAll').removeClass('active');
       $('.filterCompleted').removeClass('active');
@@ -118,14 +118,12 @@ export class TodoListComponent {
     this.speechRecognitionService.record().subscribe(
       (value : string) => {
         this.inputSpeechText = value;
+        this.todoListService.append(this.inputSpeechText);
       },
       (error : string) => {
         if (error === "no-speech") {
           this.activeSpeechRecognition();
         }
-      },
-      () => {
-        this.todoListService.append(this.inputSpeechText);
       }
     );
   }
