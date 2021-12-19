@@ -43,7 +43,12 @@ export class TodolistService {
     return this;
   }
 
-
+  updateListLabel(label: string): this{
+    const L = this.subj.getValue();
+    const NL = {label, items: L.items};
+    this.subj.next( NL );
+    return this;
+  }
 
   remove(...items: Readonly<TodoItem[]>): this {
     const L = this.subj.getValue();
@@ -51,7 +56,6 @@ export class TodolistService {
     this.subj.next( NL );
     return this;
   }
-
 
   update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if(data.label !== "") {
