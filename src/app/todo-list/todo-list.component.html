@@ -1,8 +1,20 @@
 <section class="todoapp" *ngIf="todoListService.observable|async as todoList">
   <header class="header">
-    <h1>{{todoList.label}}
-    </h1> 
-  
+    <!--<h1>{{todoList.label}}
+    </h1> -->
+
+    <h1 *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todoList.label}}</h1>
+    <input
+    *ngIf="editMode"
+    #newLabelInput
+    name="newLabelInput"
+    class="edit"
+    type="text"
+    [value]="todoList.label"
+    [(ngModel)]="newLabel"
+    [style.display]="!editMode"
+    (keyup.enter) = "updateListLabel()"
+    (focusout) = "updateListLabel()"/>
     <form (ngSubmit) ="addTodoItem()">
       <input  [(ngModel)]= "todoInputValue"
               name        = "newTodoInput"
@@ -17,12 +29,12 @@
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
-    /> 
+    />
     <label for="toggleAll" (click) = "checkAllItems()">Mark all as complete</label>
     <ul class="todo-list" *ngFor="let todoItem of todoList.items">
         <app-todo-item [todo]="todoItem" *ngIf="isItemFiltered(todoItem)" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
     </ul>
-    
+
     </section>
     <footer class="footer">
       <span class="todo-count"><strong>{{getItemsNotDone(todoList.items)}}</strong> restantes</span>
@@ -35,7 +47,7 @@
         </li>
         <li>
           <a class="filterCompleted" (click) = "setFilter('filterCompleted')">Complétés</a>
-        </li> 
+        </li>
       </ul>
       <button class="clear-completed" (click) = "deleteCheckedItems(todoList.items)">Supprimer cochées</button>
     </footer>

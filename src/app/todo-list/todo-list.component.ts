@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Output, EventEmitter,ViewChild } from '@angular/core';
 import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
 import $ from "jquery";
 import { SpeechRecognitionService } from "../speechRecognition.service";
@@ -11,6 +11,10 @@ import { SpeechRecognitionService } from "../speechRecognition.service";
 })
 export class TodoListComponent {
 
+
+  @Output() updateEmitter: EventEmitter<Partial<TodoItem>> = new EventEmitter<Partial<TodoItem>>();
+  @ViewChild('newLabelInput') newTextInput!: ElementRef<HTMLInputElement>;
+
   todoListService: TodolistService;
   speechRecognitionService: SpeechRecognitionService;
   
@@ -19,6 +23,8 @@ export class TodoListComponent {
   todoInputValue: string;
   checkAll : boolean; 
   imgPath : any = "../../mic.ico";
+  newLabel: string ;
+  editMode = false;
 
   constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService){
     this.todoListService = todoListService;
@@ -26,6 +32,7 @@ export class TodoListComponent {
     this.filter='filterAll';
     this.checkAll= false;
     this.inputSpeechText = "";
+    this.newLabel="";
     this.speechRecognitionService = speechRecognitionService;
   }
 
@@ -122,7 +129,20 @@ export class TodoListComponent {
       }
     );
   }
+
+  changeEditMode(): void {
+    this.editMode = !this.editMode;
+    if (this.editMode) {
+      requestAnimationFrame(
+        () => this.newTextInput.nativeElement.focus()
+      );
+    }
+  }
+
+  updateListLabel(): void {
+    if (this.newLabel !== undefined && this.newLabel !== '') {
+      this.todoListService.updateListLabel(this.newLabel);
+    }
+    this.changeEditMode();
+  }
 }
-
-
-
