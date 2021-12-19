@@ -6,22 +6,26 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+# Fonctionnalités implémentées
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Copie du site todomvc (https://todomvc.com/examples/vanillajs/) - Ajouter item, Modifier item, Supprimer item, Cocher item, Filtres : Tous, Actifs, Completés
+- Effacer tout
+- Supprimer cochés
+- Undo / Redo
+- Edition du nom de la liste
+- Reconnaissance Vocale
+- Version Responsive
+- Image pour la liste
+- Génération de QR Code
 
-## Running end-to-end tests
+# Problèmes rencontrés
+- Upload d'image (problème de conception : stockage dans le service ou dans le composant, problèmes de sécurité des URL avec DomSanitizationService)
+- Reconnaissance vocale 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Sources utilisées 
+- Speech Recognition (https://hassantariqblog.wordpress.com/2016/12/04/angular2-web-speech-api-speech-recognition-in-angular2/)
+- angularx-qrcode (https://www.npmjs.com/package/angularx-qrcode)
