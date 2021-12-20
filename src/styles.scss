@@ -34,7 +34,7 @@ body {
   font-weight: 300;
 }
 
-.header>form{
+.header{
   display: flex;
 }
 
@@ -437,4 +437,8 @@ html .clear-completed:active {
   border: 1px solid #ccc;
   display: inline-block;
   cursor: pointer;
+}
+
+#micIcon{
+  margin-left: 100px;
 }
