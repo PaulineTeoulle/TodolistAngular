@@ -1,8 +1,6 @@
 import { Component, ElementRef, Output, EventEmitter,ViewChild } from '@angular/core';
 import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
-import{
-  DomSanitizationService
-} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import $ from "jquery";
 import { SpeechRecognitionService } from "../speechRecognition.service";
 
@@ -28,9 +26,8 @@ export class TodoListComponent {
   newLabel: string ;
   editListLabelMode = false;
   media: any;
-  //sanitization:DomSanitizationService;
 
-  constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService){
+  constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService, private sanitizer:DomSanitizer){
     this.todoListService = todoListService;
     this.todoInputValue = '';
     this.filter='filterAll';
@@ -38,26 +35,29 @@ export class TodoListComponent {
     this.inputSpeechText = "";
     this.newLabel="";
     this.speechRecognitionService = speechRecognitionService;
-    //this.sanitization = sanitization;
   }
 
   ngOnInit(): void{
-    
-      var src = localStorage.getItem('media');
-      //this.sanitization.bypassSecurityTrustStyle(`url(${src})`);
-      this.media = src;
-      this.todoListService.updateImg(src);
-    
+    let src = localStorage.getItem("media");
+    if (src != null){
+      this.media = JSON.parse(src)['image'];
+    } 
+    this.sanitize(this.media);
+    this.todoListService.updateImg(this.media);
   }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
   onFileChange(event:any){
     let src;
     let reader = new FileReader();
     reader.onload = () => {
       src = reader.result;
-      localStorage.setItem('media', JSON.stringify([  {"image" : src}]));
+      localStorage.setItem('media', JSON.stringify(  {"image" : src}));
       this.media = src;
-      this.todoListService.updateImg(src);
+      this.todoListService.updateImg(this.media);
     }
     reader.readAsDataURL(event.target.files[0]);
   }
@@ -124,9 +124,8 @@ export class TodoListComponent {
     }
     if(this.filter==='filterCompleted' && todoItem.isDone){
       $('.filterCompleted').addClass('active');
-        $('.filterAll').removeClass('active');
-        $('.filterActives').removeClass('active');
-        $(this).addClass('active');
+      $('.filterAll').removeClass('active');
+      $('.filterActives').removeClass('active');
       return true;
     }
     return false;

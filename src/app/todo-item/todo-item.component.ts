@@ -19,7 +19,6 @@ export class TodoItemComponent {
   
   editMode = false;
   newValue!: string;
-  img:any;
 
   deleteItem(): void {
     this.deleteEmitter.emit(this.todo);

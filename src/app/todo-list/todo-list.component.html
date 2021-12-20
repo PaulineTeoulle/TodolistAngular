@@ -4,11 +4,10 @@
     <div class="input">
       <div class="inputWrapper" *ngIf="!media">
         <input type="file" (change)="onFileChange($event)"  id="custom"accept=".png, .jpg, .jpeg"/>
-        <input type="button" (click)="loadImg()" value="Upload l'image" />
       </div>
       
       <div class="imgList">
-        <img class="brochure-poster" [src]="media"/>
+        <img id="newImage" [src]="sanitize(media)" *ngIf="media"/>
       </div>
     </div>
   </div>
@@ -33,8 +32,8 @@
               class       = "new-todo"
               placeholder = "Que faire?"
               autofocus #lab/>
-      <button (click) = "activeSpeechRecognition()"><img src="../../assets/img/icon-mic.png" alt="image"/></button>
     </form>
+   
   </header>
 
   <section class="main">
@@ -74,6 +73,9 @@
         </li>
         <li>
           <a class="deleteAll" (click) = "deleteAllItems(todoList.items)"><img class="icon" src="../../assets/img/delete.png" alt="image"/></a>
+        </li>
+        <li>
+          <button (click) = "activeSpeechRecognition()"><img src="../../assets/img/icon-mic.png" alt="image"/></button>
         </li>
       </ul>
     </footer>
