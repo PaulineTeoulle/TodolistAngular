@@ -82,8 +82,8 @@
     </footer>
 
 </section>
-<div *ngIf="todoListService.observable|async as todoList">
-  <qr-code [value]="toStringQR(todoList)" [size]="500"
+<div id="QrCodeDiv"*ngIf="todoListService.observable|async as todoList">
+  <qr-code id="QrImg" [value]="toStringQR(todoList)" [size]="400"
   ></qr-code>
 </div>
 
