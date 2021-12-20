@@ -1,28 +1,39 @@
 <section class="todoapp" *ngIf="todoListService.observable|async as todoList">
-  <header class="header">
-    <!--<h1>{{todoList.label}}
-    </h1> -->
 
-    <h1 *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todoList.label}}</h1>
+  <div class="imgUpload">
+    <div class="input">
+      <div class="inputWrapper" *ngIf="!media">
+        <input type="file" (change)="onFileChange($event)"  id="custom"accept=".png, .jpg, .jpeg"/>
+      </div>
+      
+      <div class="imgList">
+        <img id="newImage" [src]="sanitize(media)" *ngIf="media"/>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <h1 *ngIf="!editListLabelMode" (dblclick)="changeEditListLabelMode()" class="texte">{{todoList.label}}</h1>
     <input
-    *ngIf="editMode"
+    *ngIf="editListLabelMode"
     #newLabelInput
     name="newLabelInput"
     class="edit"
     type="text"
     [value]="todoList.label"
     [(ngModel)]="newLabel"
-    [style.display]="!editMode"
+    [style.display]="!editListLabelMode"
     (keyup.enter) = "updateListLabel()"
     (focusout) = "updateListLabel()"/>
+  
     <form (ngSubmit) ="addTodoItem()">
       <input  [(ngModel)]= "todoInputValue"
               name        = "newTodoInput"
               class       = "new-todo"
               placeholder = "Que faire?"
               autofocus #lab/>
-      <button (click) = "activeSpeechRecognition()"><img src="../../assets/img/icon-mic.png" alt="image"/></button>
     </form>
+   
   </header>
 
   <section class="main">
@@ -62,6 +73,9 @@
         </li>
         <li>
           <a class="deleteAll" (click) = "deleteAllItems(todoList.items)"><img class="icon" src="../../assets/img/delete.png" alt="image"/></a>
+        </li>
+        <li>
+          <button (click) = "activeSpeechRecognition()"><img src="../../assets/img/icon-mic.png" alt="image"/></button>
         </li>
       </ul>
     </footer>

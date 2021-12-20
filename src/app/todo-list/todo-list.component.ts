@@ -1,8 +1,8 @@
 import { Component, ElementRef, Output, EventEmitter,ViewChild } from '@angular/core';
 import {TodolistService, TodoItem, tdlToString, TodoList} from '../todolist.service';
+import {DomSanitizer} from '@angular/platform-browser';
 import $ from "jquery";
 import { SpeechRecognitionService } from "../speechRecognition.service";
-
 
 @Component({
   selector: 'app-todo-list',
@@ -24,9 +24,10 @@ export class TodoListComponent {
   checkAll : boolean;
   imgPath : any = "../../mic.ico";
   newLabel: string ;
-  editMode = false;
+  editListLabelMode = false;
+  media: any;
 
-  constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService){
+  constructor(todoListService: TodolistService, speechRecognitionService: SpeechRecognitionService, private sanitizer:DomSanitizer){
     this.todoListService = todoListService;
     this.todoInputValue = '';
     this.filter='filterAll';
@@ -34,6 +35,31 @@ export class TodoListComponent {
     this.inputSpeechText = "";
     this.newLabel="";
     this.speechRecognitionService = speechRecognitionService;
+  }
+
+  ngOnInit(): void{
+    let src = localStorage.getItem("media");
+    if (src != null){
+      this.media = JSON.parse(src)['image'];
+    } 
+    this.sanitize(this.media);
+    this.todoListService.updateImg(this.media);
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+}
+
+  onFileChange(event:any){
+    let src;
+    let reader = new FileReader();
+    reader.onload = () => {
+      src = reader.result;
+      localStorage.setItem('media', JSON.stringify(  {"image" : src}));
+      this.media = src;
+      this.todoListService.updateImg(this.media);
+    }
+    reader.readAsDataURL(event.target.files[0]);
   }
 
   toStringQR(todolist: TodoList) : string{
@@ -98,9 +124,8 @@ export class TodoListComponent {
     }
     if(this.filter==='filterCompleted' && todoItem.isDone){
       $('.filterCompleted').addClass('active');
-        $('.filterAll').removeClass('active');
-        $('.filterActives').removeClass('active');
-        $(this).addClass('active');
+      $('.filterAll').removeClass('active');
+      $('.filterActives').removeClass('active');
       return true;
     }
     return false;
@@ -128,9 +153,9 @@ export class TodoListComponent {
     );
   }
 
-  changeEditMode(): void {
-    this.editMode = !this.editMode;
-    if (this.editMode) {
+  changeEditListLabelMode(): void {
+    this.editListLabelMode = !this.editListLabelMode;
+    if (this.editListLabelMode) {
       requestAnimationFrame(
         () => this.newTextInput.nativeElement.focus()
       );
@@ -141,6 +166,6 @@ export class TodoListComponent {
     if (this.newLabel !== undefined && this.newLabel !== '') {
       this.todoListService.updateListLabel(this.newLabel);
     }
-    this.changeEditMode();
+    this.changeEditListLabelMode();
   }
 }

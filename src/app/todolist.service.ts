@@ -10,6 +10,7 @@ export interface TodoItem {
 export interface TodoList {
   readonly label: string;
   readonly items: Readonly< TodoItem[] >;
+  srcImg:any;
 }
 
 let idItem = 0;
@@ -18,7 +19,7 @@ let idItem = 0;
   providedIn: 'root'
 })
 export class TodolistService {
-  private current: TodoList = {label: 'MIAGE', items: [] };
+  private current: TodoList = {label: 'MIAGE', items: [], srcImg:""};
   private subj = new BehaviorSubject<TodoList>(this.current);
   readonly observable = this.subj.asObservable();
   private previous: TodoList[] = [];
@@ -45,7 +46,14 @@ export class TodolistService {
 
   updateListLabel(label: string): this{
     const L = this.subj.getValue();
-    const NL = {label, items: L.items};
+    const NL = {label, items: L.items, srcImg: ""};
+    this.subj.next( NL );
+    return this;
+  }
+
+  updateImg(src: any): this{
+    const L = this.subj.getValue();
+    const NL = {...L, items: L.items, srcImg: src};
     this.subj.next( NL );
     return this;
   }
