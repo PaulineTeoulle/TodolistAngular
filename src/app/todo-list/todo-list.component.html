@@ -3,7 +3,7 @@
     <div class="imgUpload">
       <div class="input">
         <div class="inputWrapper" *ngIf="!media">
-          <input type="file" (change)="onFileChange($event)"  id="custom" accept=".png, .jpg, .jpeg"/>
+          <input type="file" (change)="onFileChange($event)"  id="custom" accept=".png, .jpg, .jpeg">
         </div>
         
         <div class="imgList">
@@ -63,7 +63,7 @@
           <a class="filterCompleted" (click) = "setFilter('filterCompleted')">Complétés</a>
         </li>
       </ul>
-      <button class="clear-completed" (click) = "deleteCheckedItems(todoList.items)">Supprimer cochées</button>
+      <button class="clear-completed" (click) = "deleteCheckedItems(todoList.items)">Supprimer cochés</button>
     </footer>
 
     <footer class="footer2">
