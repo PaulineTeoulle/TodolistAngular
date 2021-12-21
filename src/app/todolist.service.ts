@@ -5,6 +5,7 @@ export interface TodoItem {
   readonly label: string;
   readonly isDone: boolean;
   readonly id: number;
+  readonly color:string;
 }
 
 export interface TodoList {
@@ -37,9 +38,9 @@ export class TodolistService {
       items: [
         ...L.items,
         ...labels.filter( l => l !== '').map(
-            label => ({label, isDone: false, id: idItem++})
-          )
-      ]
+            label => ({label, isDone: false, id: idItem++, color: "#FFFFFF"})
+          ),
+      ],
     } );
     return this;
   }
@@ -50,6 +51,7 @@ export class TodolistService {
     this.subj.next( NL );
     return this;
   }
+
 
   updateImg(src: any): this{
     const L = this.subj.getValue();
@@ -68,7 +70,9 @@ export class TodolistService {
   update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if(data.label !== "") {
       const L = this.subj.getValue();
-      const NL = {...L, items: L.items.map(item => items.indexOf(item) >= 0 ? {...item, ...data} : item ) };
+      const NL = {...L,
+                 items: L.items.map(item => items.indexOf(item) >= 0 ? {...item, ...data} : item )
+                };
       this.subj.next( NL );
     } else {
       this.remove(...items);
@@ -82,6 +86,7 @@ export class TodolistService {
     });
     return this;
   }
+
 
   undo(): this {
     if (this.previous.length > 0) {

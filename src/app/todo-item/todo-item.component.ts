@@ -17,13 +17,22 @@ export class TodoItemComponent {
   @Output() updateEmitter: EventEmitter<Partial<TodoItem>> = new EventEmitter<Partial<TodoItem>>();
   @ViewChild('newTextInput') newTextInput!: ElementRef<HTMLInputElement>;
   
-  editMode = false;
+  editMode: boolean = false;
   newValue!: string;
+  editColorMode: boolean=false;
+  newColor!: string;
 
   deleteItem(): void {
     this.deleteEmitter.emit(this.todo);
   }
 
+  ngOnInit(): void{
+
+    let element:HTMLElement = document.getElementsByClassName("circleBase")[0] as HTMLElement;
+    if(element !=null){
+      element.style.backgroundColor = this.newColor;
+    }
+  }
   changeEditMode(): void {
     this.editMode = !this.editMode;
     if (this.editMode) {
@@ -39,6 +48,19 @@ export class TodoItemComponent {
     }
     this.changeEditMode();
   }
+
+  updateColorItem(){    
+    console.log(this.newColor);
+    if (this.newColor !== undefined && this.newColor !== '') {
+      this.updateEmitter.emit({color: this.newColor});
+    }
+    this.changeColorMode();
+  }
+
+  changeColorMode(): void {
+    this.editColorMode = !this.editColorMode;
+  }
+  
 
   updateItemDone(event: any): void {
     this.updateEmitter.emit({isDone: event.target.checked});

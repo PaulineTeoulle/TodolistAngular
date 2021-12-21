@@ -10,6 +10,10 @@
     <button (click)="deleteItem()" class="destroy"></button>
   </div>
 
+
+  <div  class="circleBase"  [style.background-color]="todo.color" (click)="changeColorMode()"></div>
+  <input class='bar' id='colour' type="color" [(ngModel)]="newColor" (change) ="updateColorItem()" *ngIf="editColorMode">
+    
   <input 
     *ngIf="editMode"
     #newTextInput
