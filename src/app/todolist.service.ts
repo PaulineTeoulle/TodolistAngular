@@ -38,11 +38,17 @@ export class TodolistService {
       items: [
         ...L.items,
         ...labels.filter( l => l !== '').map(
-            label => ({label, isDone: false, id: idItem++, color: "#FFFFFF"})
+            label => ({label, isDone: false, id: idItem++, color: this.generateRandomColor()} )
           ),
       ],
     } );
     return this;
+  }
+
+  generateRandomColor(): string {
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    let hexaColor = "#" + randomColor;
+    return hexaColor;
   }
 
   updateListLabel(label: string): this{

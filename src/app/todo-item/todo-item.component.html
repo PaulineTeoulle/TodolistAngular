@@ -8,8 +8,8 @@
     />
     <label *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todo.label}}</label>
     <button (click)="deleteItem()" class="destroy"></button>
-  </div>
 
+  </div>
 
   <div  class="circleBase"  [style.background-color]="todo.color" (click)="changeColorMode()"></div>
   <input class='bar' id='colour' type="color" [(ngModel)]="newColor" (change) ="updateColorItem()" *ngIf="editColorMode">
@@ -25,4 +25,5 @@
     [style.display]="!editMode"
     (keyup.enter) = "updateItem()"
     (focusout) = "updateItem()"/>
+
 </li>

@@ -27,7 +27,6 @@ export class TodoItemComponent {
   }
 
   ngOnInit(): void{
-
     let element:HTMLElement = document.getElementsByClassName("circleBase")[0] as HTMLElement;
     if(element !=null){
       element.style.backgroundColor = this.newColor;
@@ -50,7 +49,6 @@ export class TodoItemComponent {
   }
 
   updateColorItem(){    
-    console.log(this.newColor);
     if (this.newColor !== undefined && this.newColor !== '') {
       this.updateEmitter.emit({color: this.newColor});
     }
@@ -59,8 +57,7 @@ export class TodoItemComponent {
 
   changeColorMode(): void {
     this.editColorMode = !this.editColorMode;
-  }
-  
+  } 
 
   updateItemDone(event: any): void {
     this.updateEmitter.emit({isDone: event.target.checked});
