@@ -12,7 +12,13 @@ export class SpeechRecognitionService {
   speechRecognition: any;
 
   constructor(private zone: NgZone) {}
-
+  /*
+    Setup the service of speech recognition
+    Get string result from voice record
+    Handle error of voice record
+    Handle end of voice record
+    Handle start of voice record
+  */
   record(): Observable<string> {
     return Observable.create((observer:any) => {
       this.setupService();
@@ -23,6 +29,7 @@ export class SpeechRecognitionService {
     });
   }
 
+  //Set parameters for speech recognition
   setupService(){
     const { webkitSpeechRecognition }: IWindow = <IWindow>(<any>window);
     this.speechRecognition = new webkitSpeechRecognition();
@@ -31,6 +38,7 @@ export class SpeechRecognitionService {
     this.speechRecognition.lang = "fr";
   }
 
+  //Get results from voice record
   getStringResult(observer:any){
     this.speechRecognition.onresult = (speech: any) => {
       let text: string = "";
@@ -52,16 +60,19 @@ export class SpeechRecognitionService {
     };
   }
 
+  //Return an error to the observer
   handleError(observer:any){
     this.speechRecognition.onerror = function (error : any) {
       observer.error(error);
     };
   }
 
+  //Begin the voice record
   handleStart(){
     this.speechRecognition.start();
   }
 
+  //End the voice record
   handleEnd(observer:any){
     this.speechRecognition.onend = () => {
       observer.complete();

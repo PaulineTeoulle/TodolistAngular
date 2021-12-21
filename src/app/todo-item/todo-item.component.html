@@ -1,4 +1,5 @@
 <li [class.editMode]="editMode" [class.completed]="todo.isDone">
+  <!--Item with toggle, label-->
   <div class="view">
     <input [checked]="todo.isDone"
            class="toggle"
@@ -7,13 +8,15 @@
            (change)="updateItemDone($event)"
     />
     <label *ngIf="!editMode" (dblclick)="changeEditMode()" class="texte">{{todo.label}}</label>
+    <!--Button to delete item-->
     <button (click)="deleteItem()" class="destroy"></button>
-
   </div>
 
+  <!--Color of item and color picker-->
   <div  class="circleBase"  [style.background-color]="todo.color" (click)="changeColorMode()"></div>
   <input class='bar' id='colour' type="color" [(ngModel)]="newColor" (change) ="updateColorItem()" *ngIf="editColorMode">
-    
+  
+  <!--Input to update label of item-->
   <input 
     *ngIf="editMode"
     #newTextInput

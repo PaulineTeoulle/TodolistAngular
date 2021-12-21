@@ -1,5 +1,3 @@
-
-
 import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { TodoItem} from '../todolist.service';
 
@@ -9,10 +7,10 @@ import { TodoItem} from '../todolist.service';
   styleUrls: ['./todo-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class TodoItemComponent {
 
   @Input() todo!: TodoItem;
-
   @Output() deleteEmitter: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
   @Output() updateEmitter: EventEmitter<Partial<TodoItem>> = new EventEmitter<Partial<TodoItem>>();
   @ViewChild('newTextInput') newTextInput!: ElementRef<HTMLInputElement>;
@@ -22,16 +20,15 @@ export class TodoItemComponent {
   editColorMode: boolean=false;
   newColor!: string;
 
+  //Call the emitter to delete an item
   deleteItem(): void {
     this.deleteEmitter.emit(this.todo);
   }
 
-  ngOnInit(): void{
-    let element:HTMLElement = document.getElementsByClassName("circleBase")[0] as HTMLElement;
-    if(element !=null){
-      element.style.backgroundColor = this.newColor;
-    }
-  }
+  /*
+    Change the editMode boolean 
+    Autofocus on the input
+  */
   changeEditMode(): void {
     this.editMode = !this.editMode;
     if (this.editMode) {
@@ -41,6 +38,7 @@ export class TodoItemComponent {
     }
   }
 
+  //Call the emitter to update label of an item
   updateItem(): void {
     if (this.newValue !== undefined && this.newValue !== '') {
       this.updateEmitter.emit({label: this.newValue});
@@ -48,6 +46,7 @@ export class TodoItemComponent {
     this.changeEditMode();
   }
 
+  //Call the emitter to update color of an item
   updateColorItem(){    
     if (this.newColor !== undefined && this.newColor !== '') {
       this.updateEmitter.emit({color: this.newColor});
@@ -55,12 +54,13 @@ export class TodoItemComponent {
     this.changeColorMode();
   }
 
+  //Change the editColorMode boolean
   changeColorMode(): void {
     this.editColorMode = !this.editColorMode;
   } 
 
+  //Call the emitter to update isDone of an item
   updateItemDone(event: any): void {
     this.updateEmitter.emit({isDone: event.target.checked});
   }
-  
 }

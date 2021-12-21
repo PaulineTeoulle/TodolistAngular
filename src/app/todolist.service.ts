@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+//Interface TodoItem 
 export interface TodoItem {
   readonly label: string;
   readonly isDone: boolean;
@@ -8,6 +9,7 @@ export interface TodoItem {
   readonly color:string;
 }
 
+//Interface TodoList
 export interface TodoList {
   readonly label: string;
   readonly items: Readonly< TodoItem[] >;
@@ -19,7 +21,9 @@ let idItem = 0;
 @Injectable({
   providedIn: 'root'
 })
+
 export class TodolistService {
+
   private current: TodoList = {label: 'MIAGE', items: [], srcImg:""};
   private subj = new BehaviorSubject<TodoList>(this.current);
   readonly observable = this.subj.asObservable();
@@ -31,6 +35,7 @@ export class TodolistService {
     this.manageUndoRedo();
   }
 
+  //Add items to todolist with label, randomColor, isDone and id
   append(...labels: Readonly<string[]>): this {
     const L: TodoList = this.subj.getValue();
     this.subj.next( {
@@ -45,12 +50,14 @@ export class TodolistService {
     return this;
   }
 
+  //Generate random color hexadecimal string
   generateRandomColor(): string {
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
     let hexaColor = "#" + randomColor;
     return hexaColor;
   }
 
+  //Update the label of the list
   updateListLabel(label: string): this{
     const L = this.subj.getValue();
     const NL = {label, items: L.items, srcImg: ""};
@@ -58,7 +65,7 @@ export class TodolistService {
     return this;
   }
 
-
+  //Update the srcImg of the list
   updateImg(src: any): this{
     const L = this.subj.getValue();
     const NL = {...L, items: L.items, srcImg: src};
@@ -66,6 +73,7 @@ export class TodolistService {
     return this;
   }
 
+  //Remove item of the list
   remove(...items: Readonly<TodoItem[]>): this {
     const L = this.subj.getValue();
     const NL = {...L, items: L.items.filter(item => items.indexOf(item) === -1 ) };
@@ -73,6 +81,7 @@ export class TodolistService {
     return this;
   }
 
+  //Update item of the list
   update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if(data.label !== "") {
       const L = this.subj.getValue();
@@ -86,6 +95,7 @@ export class TodolistService {
     return this;
   }
 
+  //Update all items of the list
   updateAll(data: Partial<TodoItem>) : this {
     this.current.items.forEach(item => {
       this.update(data, item);
@@ -93,7 +103,7 @@ export class TodolistService {
     return this;
   }
 
-
+  //Undo the action
   undo(): this {
     if (this.previous.length > 0) {
       this.subj.next( this.previous[this.previous.length - 1] );
@@ -101,6 +111,7 @@ export class TodolistService {
     return this;
   }
 
+  //Redo the action
   redo(): this {
     if (this.futures.length > 0) {
       this.subj.next( this.futures[this.futures.length - 1] );
@@ -108,6 +119,7 @@ export class TodolistService {
     return this;
   }
 
+  //Manage persistency whith the localStorage
   private managePersistency() {
     const str = localStorage.getItem('TDL_L3_MIAGE');
     if (str && str !== tdlToString(this.current) ) {
@@ -115,6 +127,7 @@ export class TodolistService {
     }
   }
 
+  //Manage undo redo with the localStorage
   private manageUndoRedo() {
     this.observable.subscribe( tdl => {
       if (tdl !== this.current) {
@@ -150,10 +163,12 @@ export class TodolistService {
   }
 }
 
+//Return JSON with todolist
 export function tdlToString(tdl: TodoList): string {
   return JSON.stringify(tdl);
 }
 
+//Return todolist with JSON
 export function strToTdl(str: string): TodoList {
   const L: TodoList = JSON.parse(str);
   idItem = L.items.reduce( (id, item) => id <= item.id ? item.id + 1 : id, 0);

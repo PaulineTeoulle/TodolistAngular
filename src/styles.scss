@@ -303,7 +303,7 @@ body {
   font-weight: 300;
 }
 
-.filters {
+.filters, .actions {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -312,11 +312,11 @@ body {
   left: 0;
 }
 
-.filters li {
+.filters li, .actions li {
   display: inline;
 }
 
-.filters li a {
+.filters li a, .actions li a {
   color: inherit;
   margin: 3px;
   padding: 3px 7px;
@@ -329,14 +329,14 @@ body {
   color: blue;
 }
 
-.filters li a:hover {
+.filters li a:hover, .actions li a:hover {
   border-color: rgba(175, 47, 47, 0.1);
   font-weight: bold;
   cursor: pointer;
 }
 
 
-.filters li a.selected {
+.filters li a.selected, .actions li a.selected {
   border-color: rgba(175, 47, 47, 0.2);
   font-weight: bold;
 }
@@ -376,10 +376,6 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
-/*
-	Hack to remove background from Mobile Safari.
-	Can't use it globally since it destroys checkboxes in Firefox
-*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   .toggle-all,
   .todo-list li .toggle {
@@ -396,7 +392,7 @@ html .clear-completed:active {
     height: 50px;
   }
 
-  .filters {
+  .filters, .actions {
     bottom: 10px;
   }
 }
@@ -404,7 +400,7 @@ html .clear-completed:active {
 @media(max-width: 700px) {
   .footer{
     height: 50px;
-    &>.filters{
+    &>.filters, .actions{
       font-size: 16px;
       bottom: 80px;
       display: flex;
@@ -414,7 +410,7 @@ html .clear-completed:active {
 
   .footer2{
     height: 50px;
-    &>.filters{
+    &>.actions{
       font-size: 16px;
       bottom: 10px;
       display: flex;
@@ -428,7 +424,6 @@ html .clear-completed:active {
   width: 550px;
   height: auto;
 }
-
 
 .inputWrapper{
   border: 1px solid #ccc;
@@ -464,5 +459,5 @@ input[type="color"]{
   top: 15px;
   border : none;
   width:30px;
-  height: 30px;;
+  height: 30px;
 }

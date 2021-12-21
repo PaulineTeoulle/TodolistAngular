@@ -1,17 +1,18 @@
 <div class="todoapp" *ngIf="todoListService.observable|async as todoList">
 
+  <!--Image of the todolist (Upload and load)-->
     <div class="imgUpload">
       <div class="input">
-        <div class="inputWrapper" *ngIf="!media">
+        <div class="inputWrapper" *ngIf="!listImg">
           <input type="file" (change)="onFileChange($event)"  id="custom" accept=".png, .jpg, .jpeg">
         </div>
-        
         <div class="imgList">
-          <img id="newImage" [src]="sanitize(media)" *ngIf="media"/>
+          <img id="newImage" [src]="sanitize(listImg)" *ngIf="listImg"/>
         </div>
       </div>
     </div>
 
+    <!--Label of the todolist (Load and Update)-->
     <header class="header">
         <h1 *ngIf="!editListLabelMode" (dblclick)="changeEditListLabelMode()" class="texte">{{todoList.label}}</h1>
         <h1><input
@@ -26,7 +27,7 @@
         [style.display]="!editListLabelMode"
         (keyup.enter) = "updateListLabel()"
         (focusout) = "updateListLabel()" maxlength="10"/></h1>
-      
+      <!--Input to add an item to the list-->
       <form (ngSubmit) ="addTodoItem()">
         <input  [(ngModel)]= "todoInputValue"
                 name        = "newTodoInput"
@@ -34,9 +35,8 @@
                 placeholder = "Que faire?"
                 autofocus #lab/>
       </form>
-
+      <!--Speech Recognition-->
       <button id="micIcon" (click) = "activeSpeechRecognition()"><img src="../../assets/img/icon-mic.png" alt="image"/></button>
-    
     </header>  
 
     <div class="main">
@@ -45,6 +45,7 @@
               name="toggleAll"
       />
       <label for="toggleAll" (click) = "checkAllItems()">Mark all as complete</label>
+      <!--List of items in the list-->
       <ul class="todo-list" *ngFor="let todoItem of todoList.items">
           <app-todo-item [todo]="todoItem" *ngIf="isItemFiltered(todoItem)" (deleteEmitter)="deleteTodoItem($event)" (updateEmitter)="updateTodoItem($event, todoItem)"></app-todo-item>
       </ul>
@@ -52,6 +53,7 @@
 
     <footer class="footer">
       <span class="todo-count"><strong>{{getItemsNotDone(todoList.items)}}</strong> restantes</span>
+      <!--List of filters for items-->
       <ul class="filters">
         <li>
           <a class="filterAll active" (click) = "setFilter('filterAll')">Tous</a>
@@ -67,7 +69,8 @@
     </footer>
 
     <footer class="footer2">
-      <ul class="filters">
+      <!--List of actions for list-->
+      <ul class="actions">
         <li>
           <a class="undo" (click) = "undo()"><img class="icon" src="../../assets/img/undo.png" alt="image"/></a>
         </li>
@@ -79,12 +82,9 @@
         </li>
       </ul>
     </footer>
-
-    
-      
   </div>
 
- 
+ <!--QR Code-->
 <div id="QrCodeDiv"*ngIf="todoListService.observable|async as todoList">
   <qr-code id="QrImg" [value]="toStringQR(todoList)" [size]="400"></qr-code>
 </div>
