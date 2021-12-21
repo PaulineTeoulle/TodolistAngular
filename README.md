@@ -1,13 +1,13 @@
 # PWA - TP3 - Todolist Angular
 
-## Installation du projet
+# Installation du projet
 
-# Cloner le projet 
+## Cloner le projet 
 `
    git clone https://github.com/PaulineTeoulle/TodolistAngular.git
    cd TodolistAngular
 `
-# Installation des dépendances: 
+## Installation des dépendances: 
 `
   npm install
 `
