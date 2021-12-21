@@ -7,13 +7,11 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { QRCodeModule } from 'angular2-qrcode';
 import { SpeechRecognitionService } from "./speechRecognition.service";
-import { ColorPickerComponent } from './color-picker/color-picker.component';
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
-    TodoItemComponent,
-    ColorPickerComponent
+    TodoItemComponent
   ],
   imports: [
     BrowserModule,

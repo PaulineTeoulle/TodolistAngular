@@ -10,6 +10,10 @@
     <button (click)="deleteItem()" class="destroy"></button>
   </div>
 
+  <div class="circleBase">
+    
+  </div>
+  <input type="color" [(ngModel)]="newColor" (change) ="updateColorItem()">
   <input 
     *ngIf="editMode"
     #newTextInput

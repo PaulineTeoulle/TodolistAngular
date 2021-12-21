@@ -20,6 +20,8 @@ export class TodoItemComponent {
   editMode = false;
   newValue!: string;
 
+  newColor:any;
+
   deleteItem(): void {
     this.deleteEmitter.emit(this.todo);
   }
@@ -38,6 +40,14 @@ export class TodoItemComponent {
       this.updateEmitter.emit({label: this.newValue});
     }
     this.changeEditMode();
+  }
+
+  updateColorItem(){
+    console.log(this.newColor);
+    let element:HTMLElement = document.getElementsByClassName("circleBase")[0] as HTMLElement;
+    if(element !=null){
+      element.style.backgroundColor = this.newColor;
+    }
   }
 
   updateItemDone(event: any): void {

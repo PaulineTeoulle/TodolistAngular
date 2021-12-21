@@ -1,0 +1,152 @@
+[33mcommit ed9ec220422ff798585c47e37ea5692b3185a433[m[33m ([m[1;36mHEAD -> [m[1;32mColor_Item[m[33m)[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Tue Dec 21 10:46:43 2021 +0100
+
+    Add component for color-picker
+
+[33mcommit ab88c64e6d8431e42918ddae21d38718f62e9617[m[33m ([m[1;31morigin/main[m[33m)[m
+Merge: 9c76646 3f63744
+Author: PaulineTeoulle <44019267+PaulineTeoulle@users.noreply.github.com>
+Date:   Mon Dec 20 21:39:34 2021 +0100
+
+    Merge pull request #1 from PaulineTeoulle/imageUpload
+    
+    Upload Image (Add in TodoList Service)
+
+[33mcommit 3f63744a1a421c268e030a141058b900e548b7a7[m[33m ([m[1;31morigin/imageUpload[m[33m, [m[1;32mimageUpload[m[33m, [m[1;32mQRCode_Import[m[33m)[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Mon Dec 20 21:28:49 2021 +0100
+
+    Fix upload img (get localStorage when reshreshing)
+
+[33mcommit 9c76646d25defc803116311dbf40ddf541c5efc4[m
+Author: PaulineTeoulle <44019267+PaulineTeoulle@users.noreply.github.com>
+Date:   Sun Dec 19 20:41:04 2021 +0100
+
+    Update README.md
+
+[33mcommit b414f9a3f7201d70f447b8363a7e053d2461e8db[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sun Dec 19 20:18:02 2021 +0100
+
+    Add img to TodoList in service
+
+[33mcommit e082bff725985018f055afe605b44aedcd19304d[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sun Dec 19 19:12:38 2021 +0100
+
+    Add upload img for a list
+
+[33mcommit 4ea7c6a846e91830e8ccb2c652442b95e7f4963d[m[33m ([m[1;32mmain[m[33m)[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sun Dec 19 17:22:22 2021 +0100
+
+    Refactor : clean code
+
+[33mcommit b2a18a846867db7a0fb30fbeaa5882a8725a8c52[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sun Dec 19 17:10:31 2021 +0100
+
+    Fix Speech Recognition
+
+[33mcommit a792454960f3fbf9595261e17ec61b31d92228ae[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sun Dec 19 17:09:56 2021 +0100
+
+    Add updateListLabel
+
+[33mcommit 9ee0d8fa78bb06cc172e3ca5440d99285c588f64[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sun Dec 19 17:05:57 2021 +0100
+
+    Add updateListLabel in todolistService
+
+[33mcommit be6d4cd642791e9add0d45d8f125935929a347f0[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sat Dec 18 17:30:18 2021 +0100
+
+    Add css and jquery
+
+[33mcommit 66250928110a75a5bbcec6f73aa916c7fa39078d[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sat Dec 18 17:05:58 2021 +0100
+
+    Add icons
+
+[33mcommit b2da79b47424b78b4e540eff0954aa303cf163c1[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sat Dec 18 16:54:03 2021 +0100
+
+    Extract method from service : clean code
+
+[33mcommit 25a009e940ca301fdc1428626310e82bb9066399[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sat Dec 18 16:48:24 2021 +0100
+
+    Update variable name in SpeechRecognitionService
+
+[33mcommit 31a1ba0fe2b10376bc18a71b8dd52a2985157b13[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Sat Dec 18 16:46:57 2021 +0100
+
+    Add Speech Recognition First-Part
+
+[33mcommit 6e371c76ccf4f2715824b76918a7e5526fc040ad[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Wed Dec 1 15:33:01 2021 +0100
+
+    Add QR Code Generation
+
+[33mcommit 4013af6816669ac77f0cba01bd19b821166cf5c1[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Wed Dec 1 13:36:19 2021 +0100
+
+    Add focus on editing
+
+[33mcommit effae3e961758d4666349370982a5c326cc543d2[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Fri Nov 19 19:11:50 2021 +0100
+
+    Add Check All Items
+
+[33mcommit 043e5e7a8e3aa05643e234e1688eb5cd4e77b4ea[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Fri Nov 19 18:13:04 2021 +0100
+
+    Add Undo Redo
+
+[33mcommit f028ae260413a8271ff12db2e39e9b959c6d057c[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Fri Nov 19 18:11:29 2021 +0100
+
+    Add filters
+
+[33mcommit 8320c5f07875edc2f3edce4e369e491315808541[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Thu Nov 18 17:11:27 2021 +0100
+
+    Add Remove Checked Items
+
+[33mcommit 5daeb49893a8d48618903b96ed1f1df733366179[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Thu Nov 18 17:03:49 2021 +0100
+
+    Add Remove All Items
+
+[33mcommit 8656b68cd5dd0b5270a36eef36d8964c9e89c9c1[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Thu Nov 18 16:48:47 2021 +0100
+
+    Refactor
+
+[33mcommit 25904de7424d71c2bb4a6b0350f7a9f0875aeaa0[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Thu Nov 18 16:43:34 2021 +0100
+
+    TodoList done without filters
+
+[33mcommit 1f025ac11e92b89b305fc86962bb97ce153d73fb[m
+Author: Pauline <pa.teoulle@gmail.com>
+Date:   Wed Nov 17 17:22:43 2021 +0100
+
+    Initial commit
