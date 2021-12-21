@@ -34,7 +34,7 @@ body {
   font-weight: 300;
 }
 
-.header>form{
+.header{
   display: flex;
 }
 
@@ -439,6 +439,15 @@ html .clear-completed:active {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+#micIcon{
+  margin-left: 100px;
+}
+
+#QrCodeDiv{
+  margin-left: 15%;
+  margin-right: 15%;
+=======
 
 .circleBase {
   border-radius: 50%;
@@ -446,4 +455,5 @@ html .clear-completed:active {
   height: 50px;
   background: rgb(255, 255, 255);
   border: 1px solid #000;
+>>>>>>> 23aea594a21bd844019eae2d6ff80519f9a340ed
 }
