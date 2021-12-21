@@ -43,8 +43,8 @@ Le projet sera disponible à l'adresse suivante :  <http://localhost:4200/>
  > Cliquer sur l'icone déclenche la reconnaissance vocale et ajoute à la liste le texte entendu par l'ordinateur.
 
 - Ajout d'image pour la liste
-  > Ajout d'un bouton pour choisir un fichier. 
-  > Ajout de l'image choisie à la liste.
+ > Ajout d'un bouton pour choisir un fichier.
+ > Ajout de l'image choisie à la liste.
 
 - Génération de QR Code
 >  Ajout d'un QR Code généré automatiquement représentant la liste au format JSON. 
