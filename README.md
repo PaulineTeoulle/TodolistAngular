@@ -21,10 +21,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - Version Responsive
 - Image pour la liste
 - Génération de QR Code
+- Ajout de couleur pour un item (ColorPicker)
 
 # Problèmes rencontrés
-- Upload d'image (problème de conception : stockage dans le service ou dans le composant, problèmes de sécurité des URL avec DomSanitizationService)
-- Reconnaissance vocale 
+- Upload d'image (problème au niveau du choix de conception : stockage dans le service ou dans le composant / stockage dans le localstorage ou dans le dossier assets, problèmes de sécurité des URL avec DomSanitizationService)
+- Reconnaissance vocale ()
 
 # Sources utilisées 
 - Speech Recognition (https://hassantariqblog.wordpress.com/2016/12/04/angular2-web-speech-api-speech-recognition-in-angular2/)
